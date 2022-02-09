@@ -13,5 +13,5 @@ export class UserMutationResponse{
     user?: User
 
     @Field(_type=>[FieldError],{ nullable: true})
-    errros?: FieldError[]
+    errors?: FieldError[]
 }
