@@ -1,41 +1,36 @@
-import { Field, ID, ObjectType } from 'type-graphql'
+import { Field, ID, ObjectType } from "type-graphql";
 import {
-    BaseEntity,
-    Column,
-    CreateDateColumn,
-    Entity,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn
-} from 'typeorm'
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
 @ObjectType() // return data DB => app
-@Entity() //create table 
+@Entity() //create table
+export class User extends BaseEntity {
+  @Field((_type) => ID)
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-export class User extends BaseEntity{
+  @Field((_type) => String)
+  @Column({ unique: true })
+  username!: string;
 
-    /* 
-        Create schema User postgre 
-    */
-    @Field(_type => ID)
-    @PrimaryGeneratedColumn()
-    id!: number
+  @Field((_type) => String)
+  @Column({ unique: true })
+  email!: string;
 
-    @Field(_type => String )
-    @Column({ unique: true })
-    username!: string
+  @Column()
+  password!: string;
 
-    @Field(_type => String )
-    @Column({unique: true})
-    email!: string
+  @Field()
+  @CreateDateColumn()
+  createAt: Date;
 
-    @Column()
-    password!: string
-
-    @Field( )
-    @CreateDateColumn()
-    createAt: Date
-
-    @Field( )
-    @UpdateDateColumn()
-    updateAt: Date
+  @Field()
+  @UpdateDateColumn()
+  updateAt: Date;
 }
