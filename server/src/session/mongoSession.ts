@@ -1,6 +1,6 @@
 import MongoStore from "connect-mongo";
 import session from "express-session";
-import { FieldStoreMongo } from "src/mongoDB/fieldStoreMongo";
+import { FieldStoreMongo } from "../mongoDB/fieldStoreMongo";
 
 export const createSessionMongo = ({
   name,

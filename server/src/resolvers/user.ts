@@ -8,7 +8,6 @@ import { validateRegister } from "../validators/validateRegister";
 import { LoginInput } from "../types/LoginInput";
 import { Context } from "../types/Context";
 import { COOKIE_NAME } from "../constants";
-// import { emailValidator } from "../validators/input";
 
 @Entity()
 export class UserResolver {
