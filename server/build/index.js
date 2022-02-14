@@ -9,13 +9,19 @@ const connect_2 = require("./apollo/connect");
 const connect_3 = require("./postgresDB/connect");
 const mongoSession_1 = require("./session/mongoSession");
 const constants_1 = require("./constants");
+// import cors from "cors";
+const cors = require("cors");
 const main = async () => {
+    await (0, connect_1.connectMongo)(process.env.MONGO_URI || "");
     const app = (0, express_1.default)();
     const port = process.env.PORT || 5000;
+    app.use(cors({
+        origin: "*",
+        credentials: true,
+    }));
     // Connect PostgresDB
     await (0, connect_3.connectPostgresDB)(process.env.POSTGRES_USERNAME, process.env.POSTGRES_PASS, process.env.POSTGRES_DB_NAME);
     // Connect mongoDB
-    await (0, connect_1.connectMongo)(process.env.MONGO_URI || "");
     // Create Session and Cookie in client  --  save in MongoDb
     app.use((0, mongoSession_1.createSessionMongo)({
         maxAge: 60 * 60 * 1000 * 24 * 30,

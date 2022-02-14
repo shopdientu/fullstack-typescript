@@ -7,6 +7,7 @@ const hello_1 = require("../resolvers/hello");
 const user_1 = require("../resolvers/user");
 const type_graphql_1 = require("type-graphql");
 const post_1 = require("../resolvers/post");
+// import cors from "cors";
 const connectApolloServer = async (app) => {
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await (0, type_graphql_1.buildSchema)({
@@ -17,7 +18,7 @@ const connectApolloServer = async (app) => {
         plugins: [(0, apollo_server_core_1.ApolloServerPluginLandingPageGraphQLPlayground)()],
     });
     await apolloServer.start();
-    apolloServer.applyMiddleware({ app, cors: false });
+    apolloServer.applyMiddleware({ app });
     console.log(`connected Apollo-server ${apolloServer.graphqlPath}`);
 };
 exports.connectApolloServer = connectApolloServer;

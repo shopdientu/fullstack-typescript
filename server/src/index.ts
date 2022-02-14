@@ -6,10 +6,21 @@ import { connectApolloServer } from "./apollo/connect";
 import { connectPostgresDB } from "./postgresDB/connect";
 import { createSessionMongo } from "./session/mongoSession";
 import { COOKIE_NAME, __prop__ } from "./constants";
+// import cors from "cors";
+const cors = require("cors");
 
 const main = async () => {
+  await connectMongo(process.env.MONGO_URI || "");
+
   const app = express();
   const port = process.env.PORT || 5000;
+
+  app.use(
+    cors({
+      origin: "*",
+      credentials: true,
+    })
+  );
 
   // Connect PostgresDB
   await connectPostgresDB(
@@ -19,7 +30,6 @@ const main = async () => {
   );
 
   // Connect mongoDB
-  await connectMongo(process.env.MONGO_URI || "");
 
   // Create Session and Cookie in client  --  save in MongoDb
   app.use(
