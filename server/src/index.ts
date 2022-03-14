@@ -15,12 +15,7 @@ const main = async () => {
   const app = express();
   const port = process.env.PORT || 5000;
 
-  app.use(
-    cors({
-      origin: "*",
-      credentials: true,
-    })
-  );
+  // app.use(express.json());
 
   // Connect PostgresDB
   await connectPostgresDB(
@@ -44,6 +39,7 @@ const main = async () => {
 
   //Start server Apollo
   await connectApolloServer(app);
+  app.use(cors());
 
   //Start server
   app.listen(port, async () => {

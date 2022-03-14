@@ -16,8 +16,8 @@ export const Register = () => {
     { registerInput: UserInput }
   >(registerMutation);
 
-  const [loading, hello, err] = useQuery(helloQuery);
-  console.log(loading);
+  // const { loading, hello, err } = useQuery(helloQuery);
+  // console.log(loading);
 
   const onRegisterSubmit = (values: UserInput) => {
     console.log(values);

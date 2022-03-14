@@ -15,10 +15,7 @@ const main = async () => {
     await (0, connect_1.connectMongo)(process.env.MONGO_URI || "");
     const app = (0, express_1.default)();
     const port = process.env.PORT || 5000;
-    app.use(cors({
-        origin: "*",
-        credentials: true,
-    }));
+    // app.use(express.json());
     // Connect PostgresDB
     await (0, connect_3.connectPostgresDB)(process.env.POSTGRES_USERNAME, process.env.POSTGRES_PASS, process.env.POSTGRES_DB_NAME);
     // Connect mongoDB
@@ -32,6 +29,7 @@ const main = async () => {
     }));
     //Start server Apollo
     await (0, connect_2.connectApolloServer)(app);
+    app.use(cors());
     //Start server
     app.listen(port, async () => {
         console.log(`Server started on port  ${port}`);
